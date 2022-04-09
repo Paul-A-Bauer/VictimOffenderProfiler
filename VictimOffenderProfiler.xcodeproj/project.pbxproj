@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		FE3C4BCF2801DD7D00D0F0ED /* VictimOffenderProfiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VictimOffenderProfiler; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE3C4BD22801DD7D00D0F0ED /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FEDF8FD52801E6000022FCCD /* rapidcsv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rapidcsv.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +58,74 @@
 		FE3C4BD12801DD7D00D0F0ED /* VictimOffenderProfiler */ = {
 			isa = PBXGroup;
 			children = (
+				FEAC01C02801E7700087AA1A /* Data */,
+				FEDF8FD42801E5B20022FCCD /* lib */,
 				FE3C4BD22801DD7D00D0F0ED /* main.cpp */,
 			);
 			path = VictimOffenderProfiler;
+			sourceTree = "<group>";
+		};
+		FEAC01C02801E7700087AA1A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FEAC01C32801E7A30087AA1A /* Output */,
+				FEAC01C22801E7960087AA1A /* CleanInput */,
+				FEAC01C12801E7810087AA1A /* RawSource */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		FEAC01C12801E7810087AA1A /* RawSource */ = {
+			isa = PBXGroup;
+			children = (
+				FEAC01C62801E9050087AA1A /* Visuals */,
+			);
+			path = RawSource;
+			sourceTree = "<group>";
+		};
+		FEAC01C22801E7960087AA1A /* CleanInput */ = {
+			isa = PBXGroup;
+			children = (
+				FEAC01C52801E8FE0087AA1A /* Visuals */,
+			);
+			path = CleanInput;
+			sourceTree = "<group>";
+		};
+		FEAC01C32801E7A30087AA1A /* Output */ = {
+			isa = PBXGroup;
+			children = (
+				FEAC01C42801E8F00087AA1A /* Visuals */,
+			);
+			path = Output;
+			sourceTree = "<group>";
+		};
+		FEAC01C42801E8F00087AA1A /* Visuals */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Visuals;
+			sourceTree = "<group>";
+		};
+		FEAC01C52801E8FE0087AA1A /* Visuals */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Visuals;
+			sourceTree = "<group>";
+		};
+		FEAC01C62801E9050087AA1A /* Visuals */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Visuals;
+			sourceTree = "<group>";
+		};
+		FEDF8FD42801E5B20022FCCD /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				FEDF8FD52801E6000022FCCD /* rapidcsv.h */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
