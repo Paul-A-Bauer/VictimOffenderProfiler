@@ -25,6 +25,13 @@
 /* Begin PBXFileReference section */
 		FE3C4BCF2801DD7D00D0F0ED /* VictimOffenderProfiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VictimOffenderProfiler; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE3C4BD22801DD7D00D0F0ED /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FEAC01C72801F7090087AA1A /* NIBRS_BIAS_LIST.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_BIAS_LIST.csv; sourceTree = "<group>"; };
+		FEAC01C82801F70A0087AA1A /* NIBRS_RELATIONSHIP.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_RELATIONSHIP.csv; sourceTree = "<group>"; };
+		FEAC01C92801F70A0087AA1A /* NIBRS_VICTIM.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_VICTIM.csv; sourceTree = "<group>"; };
+		FEAC01CA2801F70A0087AA1A /* NIBRS_VICTIM_OFFENDER_REL.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_VICTIM_OFFENDER_REL.csv; sourceTree = "<group>"; };
+		FEAC01CB2801F70A0087AA1A /* NIBRS_OFFENSE.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_OFFENSE.csv; sourceTree = "<group>"; };
+		FEAC01CC2801F70A0087AA1A /* NIBRS_BIAS_MOTIVATION.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_BIAS_MOTIVATION.csv; sourceTree = "<group>"; };
+		FEAC01CD2801F70A0087AA1A /* NIBRS_VICTIM_OFFENSE.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_VICTIM_OFFENSE.csv; sourceTree = "<group>"; };
 		FEDF8FD52801E6000022FCCD /* rapidcsv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rapidcsv.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +85,13 @@
 		FEAC01C12801E7810087AA1A /* RawSource */ = {
 			isa = PBXGroup;
 			children = (
+				FEAC01C72801F7090087AA1A /* NIBRS_BIAS_LIST.csv */,
+				FEAC01CC2801F70A0087AA1A /* NIBRS_BIAS_MOTIVATION.csv */,
+				FEAC01CB2801F70A0087AA1A /* NIBRS_OFFENSE.csv */,
+				FEAC01C82801F70A0087AA1A /* NIBRS_RELATIONSHIP.csv */,
+				FEAC01CA2801F70A0087AA1A /* NIBRS_VICTIM_OFFENDER_REL.csv */,
+				FEAC01CD2801F70A0087AA1A /* NIBRS_VICTIM_OFFENSE.csv */,
+				FEAC01C92801F70A0087AA1A /* NIBRS_VICTIM.csv */,
 				FEAC01C62801E9050087AA1A /* Visuals */,
 			);
 			path = RawSource;
