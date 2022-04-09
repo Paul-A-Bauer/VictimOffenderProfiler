@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FE3C4BD32801DD7D00D0F0ED /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE3C4BD22801DD7D00D0F0ED /* main.cpp */; };
+		FEAC01D128020BFE0087AA1A /* Incident.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEAC01CF28020BFE0087AA1A /* Incident.cpp */; };
+		FEAC01D428021A9D0087AA1A /* VOPDataHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEAC01D228021A9D0087AA1A /* VOPDataHandler.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +34,11 @@
 		FEAC01CB2801F70A0087AA1A /* NIBRS_OFFENSE.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_OFFENSE.csv; sourceTree = "<group>"; };
 		FEAC01CC2801F70A0087AA1A /* NIBRS_BIAS_MOTIVATION.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_BIAS_MOTIVATION.csv; sourceTree = "<group>"; };
 		FEAC01CD2801F70A0087AA1A /* NIBRS_VICTIM_OFFENSE.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_VICTIM_OFFENSE.csv; sourceTree = "<group>"; };
+		FEAC01CF28020BFE0087AA1A /* Incident.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Incident.cpp; sourceTree = "<group>"; };
+		FEAC01D028020BFE0087AA1A /* Incident.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Incident.hpp; sourceTree = "<group>"; };
+		FEAC01D228021A9D0087AA1A /* VOPDataHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VOPDataHandler.cpp; sourceTree = "<group>"; };
+		FEAC01D328021A9D0087AA1A /* VOPDataHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VOPDataHandler.hpp; sourceTree = "<group>"; };
+		FEAC01D6280229C00087AA1A /* colhdr.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = colhdr.csv; sourceTree = "<group>"; };
 		FEDF8FD52801E6000022FCCD /* rapidcsv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rapidcsv.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +75,11 @@
 				FEAC01C02801E7700087AA1A /* Data */,
 				FEDF8FD42801E5B20022FCCD /* lib */,
 				FE3C4BD22801DD7D00D0F0ED /* main.cpp */,
+				FEAC01D228021A9D0087AA1A /* VOPDataHandler.cpp */,
+				FEAC01D328021A9D0087AA1A /* VOPDataHandler.hpp */,
+				FEAC01CF28020BFE0087AA1A /* Incident.cpp */,
+				FEAC01D028020BFE0087AA1A /* Incident.hpp */,
+				FEAC01D6280229C00087AA1A /* colhdr.csv */,
 			);
 			path = VictimOffenderProfiler;
 			sourceTree = "<group>";
@@ -199,7 +211,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEAC01D428021A9D0087AA1A /* VOPDataHandler.cpp in Sources */,
 				FE3C4BD32801DD7D00D0F0ED /* main.cpp in Sources */,
+				FEAC01D128020BFE0087AA1A /* Incident.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

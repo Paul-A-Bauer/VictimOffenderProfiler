@@ -6,10 +6,16 @@
 //
 
 #include <iostream>
+#include <vector>
 #include "rapidcsv.h"
+#include "Incident.hpp"
+#include "VOPDataHandler.hpp"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    
+    // Create data handler
+    VOPDataHandler dh = VOPDataHandler();
+    //dh.LoadOffenseData();
+    
     return 0;
 }
