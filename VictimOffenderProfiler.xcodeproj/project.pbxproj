@@ -27,6 +27,7 @@
 /* Begin PBXFileReference section */
 		FE3C4BCF2801DD7D00D0F0ED /* VictimOffenderProfiler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VictimOffenderProfiler; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE3C4BD22801DD7D00D0F0ED /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FE525B8D28036B76008F328F /* csv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = csv.hpp; sourceTree = "<group>"; };
 		FEAC01C72801F7090087AA1A /* NIBRS_BIAS_LIST.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_BIAS_LIST.csv; sourceTree = "<group>"; };
 		FEAC01C82801F70A0087AA1A /* NIBRS_RELATIONSHIP.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_RELATIONSHIP.csv; sourceTree = "<group>"; };
 		FEAC01C92801F70A0087AA1A /* NIBRS_VICTIM.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NIBRS_VICTIM.csv; sourceTree = "<group>"; };
@@ -38,8 +39,7 @@
 		FEAC01D028020BFE0087AA1A /* Incident.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Incident.hpp; sourceTree = "<group>"; };
 		FEAC01D228021A9D0087AA1A /* VOPDataHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VOPDataHandler.cpp; sourceTree = "<group>"; };
 		FEAC01D328021A9D0087AA1A /* VOPDataHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VOPDataHandler.hpp; sourceTree = "<group>"; };
-		FEAC01D6280229C00087AA1A /* colhdr.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = colhdr.csv; sourceTree = "<group>"; };
-		FEDF8FD52801E6000022FCCD /* rapidcsv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rapidcsv.h; sourceTree = "<group>"; };
+		FEAC01D6280229C00087AA1A /* colhdr.csv */ = {isa = PBXFileReference; lastKnownFileType = text; name = colhdr.csv; path = lib/colhdr.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +149,7 @@
 		FEDF8FD42801E5B20022FCCD /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				FEDF8FD52801E6000022FCCD /* rapidcsv.h */,
+				FE525B8D28036B76008F328F /* csv.hpp */,
 			);
 			path = lib;
 			sourceTree = "<group>";
