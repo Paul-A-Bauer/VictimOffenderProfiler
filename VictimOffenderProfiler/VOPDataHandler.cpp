@@ -114,6 +114,39 @@ void VOPDataHandler::LoadVictimData(){
 
 void VOPDataHandler::LoadVictimOffenderRealtionshipData(){
     
-    //Get relationship data
+    //Get relationship types
+    csv::CSVReader relationshipTypes(dataInPath + "NIBRS_RELATIONSHIP.csv");
+    
+    //Get rows of data
+    for (auto& row: relationshipTypes) {
+        
+        //Add to map
+        relationshipTypeStrings[row["RELATIONSHIP_ID"].get<int>()] = row["RELATIONSHIP_NAME"].get<std::string>();
+        
+        relationshipTypeNums[row["RELATIONSHIP_ID"].get<int>()] = row["RELATIONSHIP_TYPE_ID"].get<int>();
+        
+    }
+    
+    //Get relationship types
+    csv::CSVReader relationships(dataInPath + "NIBRS_VICTIM_OFFENDER_REL.csv");
+    
+    //Get rows of data
+    for (auto& row: relationships) {
+        
+        //Locate incident for this relationship
+        for (auto& incident: incidents){
+            if(row["VICTIM_ID"].get<int>() == incident->victimID){
+                
+                //Get relationship id
+                int relationshipId = row["RELATIONSHIP_ID"].get<int>();
+                
+                //add the victim id to the incident
+                incident->relationshipNum = relationshipTypeNums[relationshipId];
+                incident->relationshipString = relationshipTypeStrings[relationshipId];
+                break;
+                
+            }
+        }
+    }
     
 }

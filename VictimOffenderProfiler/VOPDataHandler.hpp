@@ -28,6 +28,9 @@ class VOPDataHandler {
     
     std::string dataCleanedPath = "/Users/paulbauer/Documents/Classes/Spring 2022/ML/TermProject/ProjectSource/VictimOffenderProfiler/VictimOffenderProfiler/Data/CleanInput/";
     
+    map<int, std::string> relationshipTypeStrings;
+    map<int, int> relationshipTypeNums;
+    
 public:
     //Load data from files
     void LoadRawData();
