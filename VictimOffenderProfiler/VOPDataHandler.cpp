@@ -20,6 +20,15 @@ void VOPDataHandler::LoadRawData(){
     LoadVictimData();
     std::cout << "loaded victim data\n";
     
+    //Get relationship data
+    LoadVictimOffenderRealtionshipData();
+    
+    //Get bias motivation data
+    LoadBiasData();
+    
+    incidents[0]->ListContents();
+    incidents.back()->ListContents();
+    
 }
 
 void VOPDataHandler::LoadOffenseData(int limit){
@@ -143,6 +152,44 @@ void VOPDataHandler::LoadVictimOffenderRealtionshipData(){
                 //add the victim id to the incident
                 incident->relationshipNum = relationshipTypeNums[relationshipId];
                 incident->relationshipString = relationshipTypeStrings[relationshipId];
+                break;
+                
+            }
+        }
+    }
+    
+}
+
+void VOPDataHandler::LoadBiasData(){
+    //Get relationship types
+    csv::CSVReader biasTypes(dataInPath + "NIBRS_BIAS_LIST.csv");
+    
+    //Get rows of data
+    for (auto& row: biasTypes) {
+        
+        //Add to map
+        biasTypeStrings[row["BIAS_ID"].get<int>()] = row["BIAS_DESC"].get<std::string>();
+        
+        relationshipTypeNums[row["BIAS_ID"].get<int>()] = row["BIAS_CODE"].get<int>();
+        
+    }
+    
+    //Get relationship types
+    csv::CSVReader bias(dataInPath + "NIBRS_BIAS_MOTIVATION.csv");
+    
+    //Get rows of data
+    for (auto& row: bias) {
+        
+        //Locate incident for this relationship
+        for (auto& incident: incidents){
+            if(row["OFFENSE_ID"].get<int>() == incident->offenseID){
+                
+                //Get bias id
+                int biasId = row["BIAS_ID"].get<int>();
+                
+                //add the victim id to the incident
+                incident->biasNum = biasTypeNums[biasId];
+                incident->biasString = biasTypeStrings[biasId];
                 break;
                 
             }

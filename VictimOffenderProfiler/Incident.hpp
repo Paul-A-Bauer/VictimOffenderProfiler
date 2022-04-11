@@ -31,7 +31,7 @@ public:
     std::string relationshipString;
     
     //Bias
-    float biasNum = 0.0f;
+    int biasNum = 0;
     std::string biasString;
     
     //Vector reprisentation of the incident to be used in training and prediction

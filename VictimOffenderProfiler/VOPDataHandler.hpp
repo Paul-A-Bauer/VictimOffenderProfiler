@@ -12,6 +12,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <map>
 
 #include "Incident.hpp"
 
@@ -28,8 +29,13 @@ class VOPDataHandler {
     
     std::string dataCleanedPath = "/Users/paulbauer/Documents/Classes/Spring 2022/ML/TermProject/ProjectSource/VictimOffenderProfiler/VictimOffenderProfiler/Data/CleanInput/";
     
-    map<int, std::string> relationshipTypeStrings;
-    map<int, int> relationshipTypeNums;
+    //Store lists of relationship type strings and numeric id's
+    std::map<int, std::string> relationshipTypeStrings;
+    std::map<int, int> relationshipTypeNums;
+    
+    //Store lists of bias type strings and numeric id's
+    std::map<int, std::string> biasTypeStrings;
+    std::map<int, int> biasTypeNums;
     
 public:
     //Load data from files
@@ -43,6 +49,9 @@ public:
     
     //Load victim/offender relationship data
     void LoadVictimOffenderRealtionshipData();
+    
+    //Load bias data
+    void LoadBiasData();
     
 };
 
