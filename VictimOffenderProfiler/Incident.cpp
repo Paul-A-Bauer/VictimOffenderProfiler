@@ -34,3 +34,13 @@ void Incident::ListContents(){
     std::cout << "RelationshipString: " << relationshipString << "\n\n";
     
 }
+
+bool Incident::operator==(const Incident& other) const {
+    
+    if(victimID == other.victimID && offenseID == other.offenseID){
+        return true;
+    }else{
+        return false;
+    }
+    
+}

@@ -14,7 +14,12 @@ int main(int argc, const char * argv[]) {
     
     // Create data handler
     VOPDataHandler dh = VOPDataHandler();
+    
+    //Load data from files
     dh.LoadRawData();
+    
+    //Clean the data
+    dh.CleanData();
     
     return 0;
 }

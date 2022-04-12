@@ -13,6 +13,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <algorithm>
 
 #include "Incident.hpp"
 
@@ -38,6 +39,7 @@ class VOPDataHandler {
     std::map<int, int> biasTypeNums;
     
 public:
+    
     //Load data from files
     void LoadRawData();
     
@@ -53,6 +55,20 @@ public:
     //Load bias data
     void LoadBiasData();
     
+    //Clean data
+    void CleanData();
+    
+    //Remove duplicate entries
+    void RemovedDuplicates();
+    
+    //Remove entries with missing features
+    void RemoveIncompleteRecords();
+    
+    //Convert input features to float values and generate incident vectors
+    void GenerateIncidentVectors();
+    
+    //Output data as csv
+    void OutputIncidents();
 };
 
 #endif /* VOPDataHandler_hpp */

@@ -12,6 +12,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 class Incident {
     
@@ -42,6 +43,9 @@ public:
     
     //List contents of this incident
     void ListContents();
+    
+    //Compare incidents based on victim id
+    bool operator==(const Incident& other) const;
 };
 
 #endif /* Incident_hpp */

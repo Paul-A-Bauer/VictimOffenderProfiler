@@ -8,7 +8,6 @@
 #include "VOPDataHandler.hpp"
 #include "csv.hpp"
 
-#include <algorithm>
 
 void VOPDataHandler::LoadRawData(){
     
@@ -26,8 +25,12 @@ void VOPDataHandler::LoadRawData(){
     //Get bias motivation data
     LoadBiasData();
     
-    incidents[0]->ListContents();
-    incidents.back()->ListContents();
+    int skip = 0;
+    for(auto& incident: incidents){
+        if(skip % 10 == 0){
+            incident->ListContents();
+        }
+    }
     
 }
 
@@ -87,7 +90,7 @@ void VOPDataHandler::LoadVictimData(){
         //Locate incident for this offense
         for (auto& incident: incidents){
             if(row["VICTIM_ID"].get<int>() == incident->victimID){
-                std::cout << "Found data for a victim\n";
+                //std::cout << "Found data for a victim\n";
                 
                 //add the victim type, age, and sex to the incident
                 try{
@@ -96,6 +99,7 @@ void VOPDataHandler::LoadVictimData(){
                 }
                 catch(...){
                     std::cout << "could not get vitim type\n";
+                    incident->victimType = -1;
                 }
                 
                 try{
@@ -104,6 +108,7 @@ void VOPDataHandler::LoadVictimData(){
                 }
                 catch(...){
                     std::cout << "could not get victim age\n";
+                    incident->victimAge = -1;
                 }
                 
                 try{
@@ -112,6 +117,7 @@ void VOPDataHandler::LoadVictimData(){
                 }
                 catch(...){
                     std::cout << "could not get victim sex\n";
+                    incident->victimSex = "unknown";
                 }
                 
                 break;
@@ -134,7 +140,9 @@ void VOPDataHandler::LoadVictimOffenderRealtionshipData(){
         
         relationshipTypeNums[row["RELATIONSHIP_ID"].get<int>()] = row["RELATIONSHIP_TYPE_ID"].get<int>();
         
+        //std::cout << relationshipTypeStrings[row["RELATIONSHIP_ID"].get<int>()] << "\n";
     }
+    
     
     //Get relationship types
     csv::CSVReader relationships(dataInPath + "NIBRS_VICTIM_OFFENDER_REL.csv");
@@ -144,10 +152,13 @@ void VOPDataHandler::LoadVictimOffenderRealtionshipData(){
         
         //Locate incident for this relationship
         for (auto& incident: incidents){
+            
             if(row["VICTIM_ID"].get<int>() == incident->victimID){
-                
+                //std::cout << "found: " << row["VICTIM_ID"].get<int>() << ", " << incident->victimID << "\n";
                 //Get relationship id
                 int relationshipId = row["RELATIONSHIP_ID"].get<int>();
+                
+                //std::cout << "RelationshipID" << relationshipTypeStrings[relationshipId] << "\n";
                 
                 //add the victim id to the incident
                 incident->relationshipNum = relationshipTypeNums[relationshipId];
@@ -172,6 +183,7 @@ void VOPDataHandler::LoadBiasData(){
         
         relationshipTypeNums[row["BIAS_ID"].get<int>()] = row["BIAS_CODE"].get<int>();
         
+        //std::cout << biasTypeStrings[row["BIAS_ID"].get<int>()] << "\n";
     }
     
     //Get relationship types
@@ -195,5 +207,32 @@ void VOPDataHandler::LoadBiasData(){
             }
         }
     }
+    
+}
+
+void VOPDataHandler::CleanData(){
+    
+    //Remove duplicates
+    RemovedDuplicates();
+    
+}
+
+void VOPDataHandler::RemovedDuplicates(){
+    
+    //Remove duplicates
+    std::vector<Incident*>::iterator uniqueIt = std::unique(incidents.begin(), incidents.end());
+    //uniqueIt = incidents.erase(uniqueIt);
+    
+}
+
+void VOPDataHandler::RemoveIncompleteRecords(){
+    
+}
+
+void VOPDataHandler::GenerateIncidentVectors(){
+    
+}
+
+void VOPDataHandler::OutputIncidents(){
     
 }
