@@ -215,18 +215,35 @@ void VOPDataHandler::CleanData(){
     //Remove duplicates
     RemovedDuplicates();
     
+    //Remove records that are missing features
+    RemoveIncompleteRecords();
+    
 }
 
 void VOPDataHandler::RemovedDuplicates(){
     
     //Remove duplicates
     std::vector<Incident*>::iterator uniqueIt = std::unique(incidents.begin(), incidents.end());
-    //uniqueIt = incidents.erase(uniqueIt);
+    uniqueIt = incidents.erase(uniqueIt, incidents.end());
+    std::cout << "remaining incident data: " << incidents.size() << "\n";
     
 }
 
 void VOPDataHandler::RemoveIncompleteRecords(){
     
+    //Remove incompletes
+    auto incident = incidents.begin();
+    while(incident != incidents.end()){
+        std::cout << "checking if this incident is missing data\n";
+        //Check for missing features
+        if(!(**incident > 10)){
+            std::cout << "this incident is missing data\n";
+            incident = incidents.erase(incident);
+        }else{
+            ++incident;
+        }
+    }
+    std::cout << "remaining incident data: " << incidents.size() << "\n";
 }
 
 void VOPDataHandler::GenerateIncidentVectors(){

@@ -44,3 +44,57 @@ bool Incident::operator==(const Incident& other) const {
     }
     
 }
+
+bool Incident::operator>(const int compare) const {
+    
+    //Count features with valid values
+    int featureCount = 0;
+    if(offenseID > 0){
+        featureCount++;
+    }
+    
+    if(offenseType > 0){
+        featureCount++;
+    }
+    
+    //Victim
+    if(victimID > 0){
+        featureCount++;
+    }
+    
+    if(victimType > 0){
+        featureCount++;
+    }
+    
+    if(victimAge > 0){
+        featureCount++;
+    }
+    if(victimSex != ""){
+        featureCount++;
+    }
+    
+    //Relationship
+    if(relationshipNum > 0.0f){
+        featureCount++;
+    }
+    if(relationshipString != ""){
+        featureCount++;
+    }
+    
+    //Bias
+    if(biasNum > 0){
+        featureCount++;
+    }
+    if(biasString != ""){
+        featureCount++;
+    }
+    
+    //Compare valid features to int
+    if(featureCount > compare){
+    
+        return true;
+    }else{
+        return false;
+    }
+    
+}

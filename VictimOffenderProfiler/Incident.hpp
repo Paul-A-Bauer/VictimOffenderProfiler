@@ -46,6 +46,9 @@ public:
     
     //Compare incidents based on victim id
     bool operator==(const Incident& other) const;
+    
+    //Compare incident to int based on how many features have data
+    bool operator>(const int compare) const;
 };
 
 #endif /* Incident_hpp */
