@@ -18,25 +18,25 @@ class Incident {
     
 public:
     //Offense
-    int offenseID = 0;
-    int offenseType = 0;
+    int offenseID = -1;
+    int offenseType = -1;
     
     //Victim
-    int victimID = 0;
-    int victimType = 0;
-    int victimAge = 0;
+    int victimID = -1;
+    int victimType = -1;
+    int victimAge = -1;
     std::string victimSex;
     
     //Relationship
-    float relationshipNum = 0.0f;
+    float relationshipNum = -1.0f;
     std::string relationshipString;
     
     //Bias
-    int biasNum = 0;
+    int biasNum = -1;
     std::string biasString;
     
     //Vector reprisentation of the incident to be used in training and prediction
-    std::vector<float> incidentVector;
+    std::vector<float> GetIncidentVector();
     
     //Constructor
     Incident();

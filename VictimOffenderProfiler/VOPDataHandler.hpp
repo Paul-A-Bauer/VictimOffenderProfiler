@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <vector>
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <map>
 #include <algorithm>
@@ -37,6 +38,9 @@ class VOPDataHandler {
     //Store lists of bias type strings and numeric id's
     std::map<int, std::string> biasTypeStrings;
     std::map<int, int> biasTypeNums;
+    
+    //Incident vectors
+    std::vector<std::vector<float>> incidentVectors;
     
 public:
     

@@ -21,5 +21,8 @@ int main(int argc, const char * argv[]) {
     //Clean the data
     dh.CleanData();
     
+    //Output data to csv file
+    dh.OutputIncidents();
+    
     return 0;
 }

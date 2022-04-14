@@ -12,7 +12,7 @@
 void VOPDataHandler::LoadRawData(){
     
     //Get Offenses and create incident list
-    LoadOffenseData(10);
+    LoadOffenseData(50);
     std::cout << "loaded offense data\n";
     
     //Get victim data
@@ -218,6 +218,9 @@ void VOPDataHandler::CleanData(){
     //Remove records that are missing features
     RemoveIncompleteRecords();
     
+    //Convert features to float values and store them in vectors
+    GenerateIncidentVectors();
+    
 }
 
 void VOPDataHandler::RemovedDuplicates(){
@@ -234,22 +237,48 @@ void VOPDataHandler::RemoveIncompleteRecords(){
     //Remove incompletes
     auto incident = incidents.begin();
     while(incident != incidents.end()){
-        std::cout << "checking if this incident is missing data\n";
+        //std::cout << "checking if this incident is missing data\n";
+        
         //Check for missing features
-        if(!(**incident > 10)){
-            std::cout << "this incident is missing data\n";
+        if(!(**incident > 5)){
+            //std::cout << "this incident is missing data\n";
             incident = incidents.erase(incident);
         }else{
             ++incident;
         }
     }
-    std::cout << "remaining incident data: " << incidents.size() << "\n";
+    std::cout << "remaining incident data post cleaning: " << incidents.size() << "\n";
+    
 }
 
 void VOPDataHandler::GenerateIncidentVectors(){
+    
+    //Convert features to float values
+    for(auto& incident: incidents){
+        
+        //Create a vector with the 6 features
+        incidentVectors.push_back(incident->GetIncidentVector());
+    }
     
 }
 
 void VOPDataHandler::OutputIncidents(){
     
+    //open a file stream
+    std::ofstream file;
+    file.open("/Users/paulbauer/Documents/Classes/Spring 2022/ML/TermProject/ProjectSource/VictimOffenderProfiler/VictimOffenderProfiler/Data/CleanInput/testOutput.csv");
+    
+    //Create csv writer
+    auto writer = csv::make_csv_writer(file);
+
+    //Ouput all incident vectors to csv
+    for(auto& incidentVector: incidentVectors){
+
+        //Add row to the csv
+        writer << incidentVector;
+
+    }
+    
+    //Close file
+    file.close();
 }

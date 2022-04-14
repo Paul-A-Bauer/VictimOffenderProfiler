@@ -49,52 +49,89 @@ bool Incident::operator>(const int compare) const {
     
     //Count features with valid values
     int featureCount = 0;
-    if(offenseID > 0){
-        featureCount++;
-    }
+//    if(offenseID > 0){
+//        featureCount++;
+//    }else{
+//        std::cout << "missing offenseID\n";
+//    }
     
-    if(offenseType > 0){
+    if(offenseType > -1){
         featureCount++;
+    }else{
+        std::cout << "missing offenseType\n";
     }
     
     //Victim
-    if(victimID > 0){
+//    if(victimID > 0){
+//        featureCount++;
+//    }else{
+//        std::cout << "missing victimID\n";
+//    }
+    
+    if(victimType > -1){
         featureCount++;
+    }else{
+        std::cout << "missing victimType\n";
     }
     
-    if(victimType > 0){
+    if(victimAge > -1){
         featureCount++;
+    }else{
+        std::cout << "missing victimAge\n";
     }
     
-    if(victimAge > 0){
-        featureCount++;
-    }
     if(victimSex != ""){
         featureCount++;
+    }else{
+        std::cout << "missing victimSex\n";
     }
     
     //Relationship
-    if(relationshipNum > 0.0f){
+    if(relationshipNum > -1.0f){
         featureCount++;
-    }
-    if(relationshipString != ""){
-        featureCount++;
+    }else{
+        std::cout << "missing relationshipNum\n";
     }
     
+//    if(relationshipString != ""){
+//        featureCount++;
+//    }else{
+//        std::cout << "missing relationshipString\n";
+//    }
+    
     //Bias
-    if(biasNum > 0){
+    if(biasNum > -1){
         featureCount++;
+    }else{
+        std::cout << "missing biasNum\n";
     }
-    if(biasString != ""){
-        featureCount++;
-    }
+    
+//    if(biasString != ""){
+//        featureCount++;
+//    }else{
+//        std::cout << "missing biasString\n";
+//    }
     
     //Compare valid features to int
     if(featureCount > compare){
     
         return true;
     }else{
+        std::cout << "Only has " << featureCount << " features\n";
         return false;
     }
     
+}
+
+std::vector<float> Incident::GetIncidentVector(){
+    
+    //Convert all features to float values
+    float offenseTypeF = static_cast<float>(offenseType);
+    float victimTypeF = static_cast<float>(victimType);
+    float victimAgeF = static_cast<float>(victimAge);
+    float victimSexF = (victimSex != "F" ? 0.5f : 1.0f);
+    float biasNumF = static_cast<float>(biasNum);
+    
+    //Return as a vector of floats
+    return std::vector<float>({offenseTypeF, victimTypeF, victimAgeF, victimSexF, biasNumF, relationshipNum});
 }
