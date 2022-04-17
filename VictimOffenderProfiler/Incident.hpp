@@ -20,20 +20,26 @@ public:
     //Offense
     int offenseID = -1;
     int offenseType = -1;
+    float offenseTypeScale = 0.01;
     
     //Victim
     int victimID = -1;
     int victimType = -1;
+    float victimTypeScale = 0.1;
     int victimAge = -1;
+    float victimAgeScale = 0.01;
     std::string victimSex;
-    
-    //Relationship
-    float relationshipNum = -1.0f;
-    std::string relationshipString;
+    float victimSexScale = 1.0;
     
     //Bias
     int biasNum = -1;
+    float biasScale = 0.01;
     std::string biasString;
+    
+    //Relationship
+    float relationshipNum = -1.0f;
+    float relationshipScale = 0.1;
+    std::string relationshipString;
     
     //Vector reprisentation of the incident to be used in training and prediction
     std::vector<float> GetIncidentVector();

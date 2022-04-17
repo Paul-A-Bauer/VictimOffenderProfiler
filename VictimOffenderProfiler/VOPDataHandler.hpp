@@ -39,8 +39,15 @@ class VOPDataHandler {
     std::map<int, std::string> biasTypeStrings;
     std::map<int, int> biasTypeNums;
     
-    //Incident vectors
+    //Incident vectors X
     std::vector<std::vector<float>> incidentVectors;
+    
+    //Weights W
+    std::vector<float> w = {0.f, 0.f, 0.f, 0.f, 0.f};
+    std::vector<float> x;
+    
+    //Learning rate
+    float lr = 0.01;
     
 public:
     
@@ -72,7 +79,22 @@ public:
     void GenerateIncidentVectors();
     
     //Output data as csv
-    void OutputIncidents();
+    void OutputIncidentVectors();
+    
+    //Load precleaned incident data from .csv
+    void LoadIncidentVectors(std::string inputPath);
+    
+    //---------------------Learning functions-------------------------
+    
+    //Sigmoid logistic function
+    float Sigmoid(float s);
+    
+    //Hyperbolic tangent (alternative)
+    float Tanh(float s);
+    
+    //Ein
+    float GetEin();
+    
 };
 
 #endif /* VOPDataHandler_hpp */

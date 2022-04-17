@@ -117,7 +117,7 @@ bool Incident::operator>(const int compare) const {
     
         return true;
     }else{
-        std::cout << "Only has " << featureCount << " features\n";
+        //std::cout << "Only has " << featureCount << " features\n";
         return false;
     }
     
@@ -126,12 +126,12 @@ bool Incident::operator>(const int compare) const {
 std::vector<float> Incident::GetIncidentVector(){
     
     //Convert all features to float values
-    float offenseTypeF = static_cast<float>(offenseType);
-    float victimTypeF = static_cast<float>(victimType);
-    float victimAgeF = static_cast<float>(victimAge);
-    float victimSexF = (victimSex != "F" ? 0.5f : 1.0f);
-    float biasNumF = static_cast<float>(biasNum);
+    float offenseTypeF = static_cast<float>(offenseType) * offenseTypeScale;
+    float victimTypeF = static_cast<float>(victimType) * victimTypeScale;
+    float victimAgeF = static_cast<float>(victimAge) * victimAgeScale;
+    float victimSexF = (victimSex != "F" ? 0.5f : 1.0f) * victimSexScale;
+    float biasNumF = static_cast<float>(biasNum) * biasScale;
     
     //Return as a vector of floats
-    return std::vector<float>({offenseTypeF, victimTypeF, victimAgeF, victimSexF, biasNumF, relationshipNum});
+    return std::vector<float>({offenseTypeF, victimTypeF, victimAgeF, victimSexF, biasNumF, relationshipNum * relationshipScale});
 }
