@@ -15,6 +15,7 @@
 #include <string>
 #include <map>
 #include <algorithm>
+#include <math.h>
 
 #include "Incident.hpp"
 
@@ -44,10 +45,12 @@ class VOPDataHandler {
     
     //Weights W
     std::vector<float> w = {0.f, 0.f, 0.f, 0.f, 0.f};
-    std::vector<float> x;
     
     //Learning rate
     float lr = 0.01;
+    
+    //Eulers number
+    float e = 2.71828;
     
 public:
     
@@ -65,6 +68,8 @@ public:
     
     //Load bias data
     void LoadBiasData();
+    
+    //-----------------------Cleaning functions----------------------------------
     
     //Clean data
     void CleanData();
@@ -95,6 +100,23 @@ public:
     //Ein
     float GetEin();
     
+    //Eout
+    float GetEout();
+    
+    //Predict
+    float PredictProbabilityS(std::vector<float> dataPoint);
+    
+    //Predict with alernative activation
+    float PredictProbabilityTH(std::vector<float> dataPoint);
+    
+    //Update weights
+    void UpdateWeights(float predicted, float recorded, std::vector<float> inputs);
+    
+    //Train the weights on a specified number of rows using the sigmoid activation
+    void TrainModelS(int trainingSet, int epoch);
+    
+    //Train the weights on a specified number of rows using the Tanh activation
+    void TrainModelTH(int trainingSet, int epoch);
 };
 
 #endif /* VOPDataHandler_hpp */

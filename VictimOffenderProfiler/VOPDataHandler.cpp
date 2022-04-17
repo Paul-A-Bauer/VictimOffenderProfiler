@@ -339,4 +339,60 @@ void VOPDataHandler::LoadIncidentVectors(std::string inputPath) {
     std::cout << "Loaded " << incidentVectors.size() << " Incident vectors\n";
 }
 
+float VOPDataHandler::Sigmoid(float s) { 
+    return ((pow(e, s))/(1 + pow(e, s)));
+}
+
+float VOPDataHandler::Tanh(float s) { 
+    return (pow(e, s) - pow(e, (-s)))/(pow(e, s) + pow(e, (-s)));
+}
+
+void VOPDataHandler::UpdateWeights(float predicted, float recorded, std::vector<float> inputs) { 
+    
+    //Update weights for all features
+    for(int i = 0; i < w.size(); i++){
+        
+        //Get gradient
+        float g = (predicted - recorded) * inputs[i];
+        
+        //update weight for this feature
+        w[i] = w[i] - (lr * g);
+    }
+}
+
+float VOPDataHandler::PredictProbabilityS(std::vector<float> dataPoint) { 
+    
+    float weightedSum = 0;
+    
+    //calculate prediction using current weights
+    for(int i = 0; i < w.size(); i++){
+        weightedSum += w[i] * dataPoint[i];
+    }
+    
+    //Activate using sigmoid and return
+    return Sigmoid(weightedSum);
+}
+
+void VOPDataHandler::TrainModelS(int trainingSet, int epoch) { 
+    
+    //Train for requested number of epoch
+    for(int i = 0; i < epoch; i++){
+        
+        //predict and update weights for each data point in the test set
+        for(int j = 0; j < trainingSet; j++){
+            
+            //Get a predicted value
+            float predictedOutput = PredictProbabilityS(incidentVectors[j]);
+            
+            UpdateWeights(predictedOutput, incidentVectors[i][(w.size()+1)], incidentVectors[i]);
+        }
+        
+    }
+}
+
+
+
+
+
+
 

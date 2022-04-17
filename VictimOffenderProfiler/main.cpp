@@ -19,7 +19,7 @@ int main(int argc, const char * argv[]) {
     int input = 0;
     
     //Menu string
-    std::string menuString = "\n\n\n\nSelect action\n 1. Load Raw Data\n 2. Clean Data and generate vectors\n 3. Output vectors\n 4. Load pre cleaned vectors\n Enter -1 to Quit\n";
+    std::string menuString = "\n\n\n\nSelect action\n 1. Load Raw Data\n 2. Clean Data and generate vectors\n 3. Output vectors\n 4. Load pre cleaned vectors\n 5. Train using sigmoid\n Enter -1 to Quit\n";
     
     //menu loop
     while(input > -1) {
@@ -51,11 +51,35 @@ int main(int argc, const char * argv[]) {
                     break;
                 }
                 case 4:{
+                    
                     //Get file path for pre cleaned data
                     std::string path;
+                    std::cout << "Enter the file name with full path and extension\n";
                     std::cin >> path;
                     //Load pre cleaned data from a csv file
                     dh.LoadIncidentVectors(path);
+                    
+                    //Clear the cin buffer
+                    std::cin.clear();
+                    std::cin.ignore(INT_MAX, '\n');
+                    
+                    break;
+                }
+                case 5:{
+                    //Get desired training set size
+                    std::cout << "How many data points would you like to use for training?\n";
+                    
+                    int trainSet;
+                    std::cin >> trainSet;
+                    
+                    //Get desired training epochs
+                    std::cout << "How many training epochs would you like to complete?\n";
+                    
+                    int trainingEpochs;
+                    std::cin >> trainingEpochs;
+                    
+                    //Execute training
+                    dh.TrainModelS(trainSet, trainingEpochs);
                     break;
                 }
                 default:{
