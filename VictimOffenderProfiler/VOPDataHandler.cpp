@@ -315,16 +315,16 @@ void VOPDataHandler::OutputIncidentVectors(){
 
 void VOPDataHandler::LoadIncidentVectors(std::string inputPath) { 
     //Get document
-    csv::CSVReader reader(dataInPath + "NIBRS_VICTIM_OFFENSE.csv");
+    csv::CSVReader reader(inputPath);
 
     //Get rows of data
-    for (auto& row: reader) {
+    for (csv::CSVRow& row: reader) {
 
         //Create vector for row
         std::vector<float> rowVec;
 
         //load vecors from csv
-        for(auto& col: row){
+        for(csv::CSVField& col: row){
 
             //Create vector
             rowVec.push_back(col.get<float>());
@@ -339,8 +339,11 @@ void VOPDataHandler::LoadIncidentVectors(std::string inputPath) {
     std::cout << "Loaded " << incidentVectors.size() << " Incident vectors\n";
 }
 
-float VOPDataHandler::Sigmoid(float s) { 
-    return ((pow(e, s))/(1 + pow(e, s)));
+float VOPDataHandler::Sigmoid(float s) {
+    float top = 1;//(pow(e, s));
+    float bottom = (1 + pow(e, (-1 * s)));
+    float S = (top/bottom);
+    return S;
 }
 
 float VOPDataHandler::Tanh(float s) { 

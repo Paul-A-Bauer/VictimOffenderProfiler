@@ -29,7 +29,7 @@ int main(int argc, const char * argv[]) {
         //Get input
         if(!(std::cin >> input)){
             std::cin.clear ();
-            std::cin.ignore (256);
+            std::cin.ignore (std::numeric_limits<std::streamsize>::max(), '\n');
         }
         else{
             
@@ -56,12 +56,13 @@ int main(int argc, const char * argv[]) {
                     std::string path;
                     std::cout << "Enter the file name with full path and extension\n";
                     std::cin >> path;
+                    
+                    //Clear the cin buffer
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    
                     //Load pre cleaned data from a csv file
                     dh.LoadIncidentVectors(path);
                     
-                    //Clear the cin buffer
-                    std::cin.clear();
-                    std::cin.ignore(INT_MAX, '\n');
                     
                     break;
                 }

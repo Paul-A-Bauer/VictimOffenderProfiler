@@ -16,6 +16,7 @@
 #include <map>
 #include <algorithm>
 #include <math.h>
+#include <limits>
 
 #include "Incident.hpp"
 
@@ -44,7 +45,7 @@ class VOPDataHandler {
     std::vector<std::vector<float>> incidentVectors;
     
     //Weights W
-    std::vector<float> w = {0.f, 0.f, 0.f, 0.f, 0.f};
+    std::vector<float> w = {0.2, 0.2, 0.2, 0.2, 0.2};
     
     //Learning rate
     float lr = 0.01;
