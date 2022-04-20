@@ -27,11 +27,11 @@ class VOPDataHandler {
     std::vector<Incident*> incidents;
     
     //Set path for data folder
-    std::string dataInPath = "/Users/paulbauer/Documents/Classes/Spring 2022/ML/TermProject/ProjectSource/VictimOffenderProfiler/VictimOffenderProfiler/Data/RawSource/";
+    std::string dataInPath = "/Users/paulbauer/Documents/Classes/Spring_2022/ML/TermProject/ProjectSource/VictimOffenderProfiler/VictimOffenderProfiler/Data/RawSource/";
     
-    std::string dataOutPath = "/Users/paulbauer/Documents/Classes/Spring 2022/ML/TermProject/ProjectSource/VictimOffenderProfiler/VictimOffenderProfiler/Data/Output/";
+    std::string dataOutPath = "/Users/paulbauer/Documents/Classes/Spring_2022/ML/TermProject/ProjectSource/VictimOffenderProfiler/VictimOffenderProfiler/Data/Output/";
     
-    std::string dataCleanedPath = "/Users/paulbauer/Documents/Classes/Spring 2022/ML/TermProject/ProjectSource/VictimOffenderProfiler/VictimOffenderProfiler/Data/CleanInput/";
+    std::string dataCleanedPath = "/Users/paulbauer/Documents/Classes/Spring_2022/ML/TermProject/ProjectSource/VictimOffenderProfiler/VictimOffenderProfiler/Data/CleanInput/";
     
     //Store lists of relationship type strings and numeric id's
     std::map<int, std::string> relationshipTypeStrings;
@@ -81,6 +81,9 @@ public:
     //Remove entries with missing features
     void RemoveIncompleteRecords();
     
+    //Convert relationships to binary
+    void SortRelationships();
+    
     //Convert input features to float values and generate incident vectors
     void GenerateIncidentVectors();
     
@@ -99,10 +102,10 @@ public:
     float Tanh(float s);
     
     //Ein
-    float GetEin();
+    float GetError(int trainingSet);
     
-    //Eout
-    float GetEout();
+    float GetDotProduct(float y, std::vector<float> x);
+    float GetDotProduct(std::vector<float> y, std::vector<float> x);
     
     //Predict
     float PredictProbabilityS(std::vector<float> dataPoint);

@@ -38,7 +38,7 @@ public:
     
     //Relationship
     float relationshipNum = -1.0f;
-    float relationshipScale = 0.1;
+    float relationshipScale = 1.0;
     std::string relationshipString;
     
     //Vector reprisentation of the incident to be used in training and prediction

@@ -12,7 +12,7 @@
 void VOPDataHandler::LoadRawData(){
     
     //Get Offenses and create incident list
-    LoadOffenseData(10000);
+    LoadOffenseData(5000);
     std::cout << "loaded offense data\n";
     
     //Get victim data
@@ -181,7 +181,7 @@ void VOPDataHandler::LoadVictimOffenderRealtionshipData(){
                 //std::cout << "RelationshipID" << relationshipTypeStrings[relationshipId] << "\n";
                 
                 //add the victim id to the incident
-                incident->relationshipNum = relationshipTypeNums[relationshipId];
+                incident->relationshipNum = relationshipId;
                 incident->relationshipString = relationshipTypeStrings[relationshipId];
                 relationshipsAdded++;
                 break;
@@ -251,7 +251,9 @@ void VOPDataHandler::CleanData(){
     //Convert features to float values and store them in vectors
     GenerateIncidentVectors();
     
-}
+    //Sort outputs into categories
+    SortRelationships();
+    }
 
 void VOPDataHandler::RemovedDuplicates(){
     
@@ -281,6 +283,19 @@ void VOPDataHandler::RemoveIncompleteRecords(){
     
 }
 
+void VOPDataHandler::SortRelationships(){
+    
+    for(auto& incident: incidentVectors){
+        
+        //check what relationship is
+        if(incident[5] == 18 || incident[5] == 1 || incident[5] == 7 || incident[5] == 8 || incident[5] == 24){
+            incident[5] = 0;
+        }else{
+            incident[5] = 1;
+        }
+    }
+}
+
 void VOPDataHandler::GenerateIncidentVectors(){
     
     //Convert features to float values
@@ -294,9 +309,13 @@ void VOPDataHandler::GenerateIncidentVectors(){
 
 void VOPDataHandler::OutputIncidentVectors(){
     
+    
+    SortRelationships();
+    
+    
     //open a file stream
     std::ofstream file;
-    file.open("/Users/paulbauer/Documents/Classes/Spring 2022/ML/TermProject/ProjectSource/VictimOffenderProfiler/VictimOffenderProfiler/Data/CleanInput/CleanOutput.csv");
+    file.open("/Users/paulbauer/Documents/Classes/Spring_2022/ML/TermProject/ProjectSource/VictimOffenderProfiler/VictimOffenderProfiler/Data/CleanInput/CleanOutput.csv");
     
     //Create csv writer
     auto writer = csv::make_csv_writer(file);
@@ -378,8 +397,17 @@ float VOPDataHandler::PredictProbabilityS(std::vector<float> dataPoint) {
 
 void VOPDataHandler::TrainModelS(int trainingSet, int epoch) { 
     
+    //Seed weights
+    for(auto& weight: w){
+        weight = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+    }
+    
+    float error = 1.0;
     //Train for requested number of epoch
     for(int i = 0; i < epoch; i++){
+        
+        //Save current weights
+        std::vector<float> wBackup = w;
         
         //predict and update weights for each data point in the test set
         for(int j = 0; j < trainingSet; j++){
@@ -387,11 +415,80 @@ void VOPDataHandler::TrainModelS(int trainingSet, int epoch) {
             //Get a predicted value
             float predictedOutput = PredictProbabilityS(incidentVectors[j]);
             
-            UpdateWeights(predictedOutput, incidentVectors[i][(w.size()+1)], incidentVectors[i]);
+            UpdateWeights(predictedOutput, incidentVectors[i][(5)], incidentVectors[i]);
         }
         
+        //Get insample error for this epoch
+        float errorNow = GetError(trainingSet);
+        
+        //Revert weights if error not lowered
+        if(errorNow > error){
+            w = wBackup;
+        }else{
+            error = errorNow;
+        }
+        
+        
+        std::cout << "Error for epoch " << i << " : " << error << "\n";
     }
 }
+
+float VOPDataHandler::GetError(int testSet) {
+    
+    //Hold value for error
+    float error = 0.0;
+    
+    //Get predictions for in sample and check errors
+    for(int i = 0; i < testSet; i++){
+        
+        //Get prediction
+        float prediction = PredictProbabilityS(incidentVectors[i]);
+        
+        //std::cout << "predicted: " << prediction << " " << round(prediction) << " actual: " << incidentVectors[i][5] << "\n";
+        
+        //round prediction
+        if(prediction > 0.5){
+            prediction = 1;
+        }else{
+            prediction = 0;
+        }
+        
+        //Add to error
+        if(prediction != incidentVectors[i][5]){
+            error += 1.0;
+        }
+    }
+    
+    return error/testSet;
+}
+
+float VOPDataHandler::GetDotProduct(float y , std::vector<float> x) {
+    float sum = 0;
+    
+    //calculate prediction using current weights
+    for(int i = 0; i < x.size()-1; i++){
+        sum += x[i] * y;
+    }
+    
+    //Activate using sigmoid and return
+    return sum;
+}
+
+float VOPDataHandler::GetDotProduct(std::vector<float> y , std::vector<float> x) {
+    float sum = 0;
+    
+    //calculate prediction using current weights
+    for(int i = 0; i < y.size(); i++){
+        sum += x[i] * y[i];
+    }
+    
+    //Activate using sigmoid and return
+    return sum;
+}
+
+
+
+
 
 
 
