@@ -128,7 +128,7 @@ std::vector<float> Incident::GetIncidentVector(){
     //Convert all features to float values
     float offenseTypeF = static_cast<float>(offenseType) * offenseTypeScale;
     float victimTypeF = static_cast<float>(victimRace) * victimRaceScale;
-    float victimEthnicityF = static_cast<float>(victimEthnicity) * EthnicityScale;
+    float victimEthnicityF = static_cast<float>(victimEthnicity) * ethnicityScale;
     float victimAgeF = static_cast<float>(victimAge) * victimAgeScale;
     float victimSexF = (victimSex != "F" ? 0.5f : 1.0f) * victimSexScale;
     float biasNumF = static_cast<float>(biasNum) * biasScale;
