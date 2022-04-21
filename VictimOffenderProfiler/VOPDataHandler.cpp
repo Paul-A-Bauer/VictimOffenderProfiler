@@ -343,6 +343,27 @@ void VOPDataHandler::OutputIncidentVectors(){
     file.close();
 }
 
+void VOPDataHandler::OutputResultsVectors(){
+    
+    //open a file stream
+    std::ofstream file;
+    file.open("/Users/paulbauer/Documents/Classes/Spring_2022/ML/TermProject/ProjectSource/VictimOffenderProfiler/VictimOffenderProfiler/Data/Output/Predictions.csv");
+    
+    //Create csv writer
+    auto writer = csv::make_csv_writer(file);
+
+    //Ouput all incident vectors to csv
+    for(auto& incidentVector: outputVectors){
+
+        //Add row to the csv
+        writer << incidentVector;
+
+    }
+    
+    //Close file
+    file.close();
+}
+
 void VOPDataHandler::LoadIncidentVectors(std::string inputPath) { 
     //Get document
     csv::CSVReader reader(inputPath);
@@ -430,7 +451,7 @@ void VOPDataHandler::TrainModelS(int trainingSet, int epoch) {
         }
         
         //Get insample error for this epoch
-        float errorNow = GetError(trainingSet, 0);
+        float errorNow = GetError(trainingSet, 0, false);
         
         //Revert weights if error not lowered
         if(errorNow > error){
@@ -444,9 +465,12 @@ void VOPDataHandler::TrainModelS(int trainingSet, int epoch) {
     }
     
     //Get Eout
+    float Eout = GetError(int(incidentVectors.size()), trainingSet, true);
+    
+    std::cout << "Final Eout: " << Eout << "\n";
 }
 
-float VOPDataHandler::GetError(int testEnd, int testStart) {
+float VOPDataHandler::GetError(int testEnd, int testStart, bool saveResults) {
     
     //Hold value for error
     float error = 0.0;
@@ -459,6 +483,22 @@ float VOPDataHandler::GetError(int testEnd, int testStart) {
         
         //std::cout << "predicted: " << prediction << " " << round(prediction) << " actual: " << incidentVectors[i][5] << "\n";
         
+        //Add incident record and prediction to outputVectors
+        if(saveResults){
+            
+            //Add incident vector to results
+            outputVectors.push_back(incidentVectors[i]);
+            
+            //Add prediction to result record
+            outputVectors.back().push_back(prediction);
+            
+            //Print every 100th example to console
+            if(i % 100 == 0){
+                std::cout << "Actual: " << incidentVectors[i].back() << "Predicted: " << prediction << "/n";
+            }
+            
+        }
+        
         //round prediction
         if(prediction > 0.5){
             prediction = 1;
@@ -470,6 +510,13 @@ float VOPDataHandler::GetError(int testEnd, int testStart) {
         if(prediction != incidentVectors[i][(w.size())]){
             error += 1.0;
         }
+    }
+    
+    if(saveResults){
+        
+        //Save results to csv file
+        OutputResultsVectors();
+        
     }
     
     return error/testEnd;

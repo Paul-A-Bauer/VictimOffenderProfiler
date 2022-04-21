@@ -43,6 +43,7 @@ class VOPDataHandler {
     
     //Incident vectors X
     std::vector<std::vector<float>> incidentVectors;
+    std::vector<std::vector<float>> outputVectors;
     
     //Weights W
     std::vector<float> w = {0.2, 0.2, 0.2, 0.2, 0.2, 0.2};
@@ -90,6 +91,9 @@ public:
     //Output data as csv
     void OutputIncidentVectors();
     
+    //Output prediction results to csv
+    void OutputResultsVectors();
+    
     //Load precleaned incident data from .csv
     void LoadIncidentVectors(std::string inputPath);
     
@@ -102,7 +106,7 @@ public:
     float Tanh(float s);
     
     //Ein
-    float GetError(int testEnd, int testStart);
+    float GetError(int testEnd, int testStart, bool saveResults);
     
     float GetDotProduct(float y, std::vector<float> x);
     float GetDotProduct(std::vector<float> y, std::vector<float> x);
