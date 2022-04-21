@@ -134,5 +134,5 @@ std::vector<float> Incident::GetIncidentVector(){
     float biasNumF = static_cast<float>(biasNum) * biasScale;
     
     //Return as a vector of floats
-    return std::vector<float>({offenseTypeF, victimTypeF, victimAgeF, victimSexF, biasNumF, relationshipNum * relationshipScale});
+    return std::vector<float>({offenseTypeF, victimTypeF, victimAgeF, victimSexF, biasNumF, victimEthnicityF, relationshipNum * relationshipScale});
 }

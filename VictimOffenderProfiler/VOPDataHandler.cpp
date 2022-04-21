@@ -426,7 +426,7 @@ void VOPDataHandler::TrainModelS(int trainingSet, int epoch) {
             //Get a predicted value
             float predictedOutput = PredictProbabilityS(incidentVectors[j]);
             
-            UpdateWeights(predictedOutput, incidentVectors[i][(5)], incidentVectors[i]);
+            UpdateWeights(predictedOutput, incidentVectors[j][(w.size())], incidentVectors[j]);
         }
         
         //Get insample error for this epoch
@@ -465,7 +465,7 @@ float VOPDataHandler::GetError(int testSet) {
         }
         
         //Add to error
-        if(prediction != incidentVectors[i][(incidentVectors.size()-1)]){
+        if(prediction != incidentVectors[i][(w.size())]){
             error += 1.0;
         }
     }
