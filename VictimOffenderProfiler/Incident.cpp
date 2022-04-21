@@ -17,7 +17,7 @@ void Incident::ListContents(){
     
     //Print victime data
     std::cout << "VictimID: " << victimID << "\n";
-    std::cout << "VictimType: " << victimType << "\n";
+    std::cout << "VictimType: " << victimRace << "\n";
     std::cout << "VictimAge: " << victimAge << "\n";
     std::cout << "VictimSex: " << victimSex << "\n\n";
     
@@ -62,13 +62,13 @@ bool Incident::operator>(const int compare) const {
     }
     
     //Victim
-//    if(victimID > 0){
-//        featureCount++;
-//    }else{
-//        std::cout << "missing victimID\n";
-//    }
+    if(victimEthnicity > -1){
+        featureCount++;
+    }else{
+        std::cout << "missing victimID\n";
+    }
     
-    if(victimType > -1){
+    if(victimRace > -1){
         featureCount++;
     }else{
         std::cout << "missing victimType\n";
@@ -127,7 +127,8 @@ std::vector<float> Incident::GetIncidentVector(){
     
     //Convert all features to float values
     float offenseTypeF = static_cast<float>(offenseType) * offenseTypeScale;
-    float victimTypeF = static_cast<float>(victimType) * victimTypeScale;
+    float victimTypeF = static_cast<float>(victimRace) * victimRaceScale;
+    float victimEthnicityF = static_cast<float>(victimEthnicity) * EthnicityScale;
     float victimAgeF = static_cast<float>(victimAge) * victimAgeScale;
     float victimSexF = (victimSex != "F" ? 0.5f : 1.0f) * victimSexScale;
     float biasNumF = static_cast<float>(biasNum) * biasScale;

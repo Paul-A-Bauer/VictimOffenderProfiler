@@ -106,12 +106,21 @@ void VOPDataHandler::LoadVictimData(){
                 
                 //add the victim type, age, and sex to the incident
                 try{
-                    incident->victimType = row["VICTIM_TYPE_ID"].get<int>();
+                    incident->victimRace = row["RACE_ID"].get<int>();
                     //std::cout << "got data\n";
                 }
                 catch(...){
-                    std::cout << "could not get vitim type\n";
-                    incident->victimType = -1;
+                    std::cout << "could not get vitim race\n";
+                    incident->victimRace = -1;
+                }
+                
+                try{
+                    incident->victimEthnicity = row["ETHNICITY_ID"].get<int>();
+                    //std::cout << "got data\n";
+                }
+                catch(...){
+                    std::cout << "could not get vitim ethnicity\n";
+                    incident->victimEthnicity = -1;
                 }
                 
                 try{
@@ -272,7 +281,7 @@ void VOPDataHandler::RemoveIncompleteRecords(){
         //std::cout << "checking if this incident is missing data\n";
         
         //Check for missing features
-        if(!(**incident > 5)){
+        if(!(**incident > 6)){
             //std::cout << "this incident is missing data\n";
             incident = incidents.erase(incident);
         }else{
@@ -287,11 +296,13 @@ void VOPDataHandler::SortRelationships(){
     
     for(auto& incident: incidentVectors){
         
+        int last = static_cast<int>(incident.size()-1);
+        
         //check what relationship is
-        if(incident[5] == 18 || incident[5] == 1 || incident[5] == 7 || incident[5] == 8 || incident[5] == 24){
-            incident[5] = 0;
+        if(incident[last] == 18 || incident[last] == 1 || incident[last] == 7 || incident[last] == 8 || incident[last] == 24){
+            incident[last] = 0;
         }else{
-            incident[5] = 1;
+            incident[last] = 1;
         }
     }
 }
@@ -454,7 +465,7 @@ float VOPDataHandler::GetError(int testSet) {
         }
         
         //Add to error
-        if(prediction != incidentVectors[i][5]){
+        if(prediction != incidentVectors[i][(incidentVectors.size()-1)]){
             error += 1.0;
         }
     }

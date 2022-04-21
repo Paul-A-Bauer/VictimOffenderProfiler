@@ -24,8 +24,10 @@ public:
     
     //Victim
     int victimID = -1;
-    int victimType = -1;
-    float victimTypeScale = 0.1;
+    int victimRace = -1;
+    int victimEthnicity = -1;
+    float ethnicityScale = 0.33;
+    float victimRaceScale = 0.125;
     int victimAge = -1;
     float victimAgeScale = 0.01;
     std::string victimSex;
