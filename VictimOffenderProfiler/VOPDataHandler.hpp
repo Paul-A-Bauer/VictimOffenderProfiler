@@ -102,7 +102,7 @@ public:
     float Tanh(float s);
     
     //Ein
-    float GetError(int trainingSet);
+    float GetError(int testEnd, int testStart);
     
     float GetDotProduct(float y, std::vector<float> x);
     float GetDotProduct(std::vector<float> y, std::vector<float> x);

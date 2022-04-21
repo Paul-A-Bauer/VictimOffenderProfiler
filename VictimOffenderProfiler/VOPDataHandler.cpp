@@ -430,7 +430,7 @@ void VOPDataHandler::TrainModelS(int trainingSet, int epoch) {
         }
         
         //Get insample error for this epoch
-        float errorNow = GetError(trainingSet);
+        float errorNow = GetError(trainingSet, 0);
         
         //Revert weights if error not lowered
         if(errorNow > error){
@@ -440,17 +440,19 @@ void VOPDataHandler::TrainModelS(int trainingSet, int epoch) {
         }
         
         
-        std::cout << "Error for epoch " << i << " : " << error << "\n";
+        std::cout << "Ein for epoch " << i << " : " << error << "\n";
     }
+    
+    //Get Eout
 }
 
-float VOPDataHandler::GetError(int testSet) {
+float VOPDataHandler::GetError(int testEnd, int testStart) {
     
     //Hold value for error
     float error = 0.0;
     
     //Get predictions for in sample and check errors
-    for(int i = 0; i < testSet; i++){
+    for(int i = testStart; i < testEnd; i++){
         
         //Get prediction
         float prediction = PredictProbabilityS(incidentVectors[i]);
@@ -470,7 +472,7 @@ float VOPDataHandler::GetError(int testSet) {
         }
     }
     
-    return error/testSet;
+    return error/testEnd;
 }
 
 float VOPDataHandler::GetDotProduct(float y , std::vector<float> x) {
@@ -496,6 +498,7 @@ float VOPDataHandler::GetDotProduct(std::vector<float> y , std::vector<float> x)
     //Activate using sigmoid and return
     return sum;
 }
+
 
 
 
