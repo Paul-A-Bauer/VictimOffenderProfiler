@@ -12,7 +12,7 @@
 void VOPDataHandler::LoadRawData(){
     
     //Get Offenses and create incident list
-    LoadOffenseData(5000);
+    LoadOffenseData(10000);
     std::cout << "loaded offense data\n";
     
     //Get victim data
@@ -205,7 +205,7 @@ void VOPDataHandler::LoadBiasData(){
         //Add to map
         biasTypeStrings[row["BIAS_ID"].get<int>()] = row["BIAS_DESC"].get<std::string>();
         
-        relationshipTypeNums[row["BIAS_ID"].get<int>()] = row["BIAS_CODE"].get<int>();
+        biasTypeNums[row["BIAS_ID"].get<int>()] = row["BIAS_CODE"].get<int>();
         
         //std::cout << biasTypeStrings[row["BIAS_ID"].get<int>()] << "\n";
     }
