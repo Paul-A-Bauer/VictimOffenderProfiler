@@ -494,7 +494,7 @@ float VOPDataHandler::GetError(int testEnd, int testStart, bool saveResults) {
             
             //Print every 100th example to console
             if(i % 100 == 0){
-                std::cout << "Actual: " << incidentVectors[i].back() << "Predicted: " << prediction << "/n";
+                std::cout << "Actual: " << incidentVectors[i].back() << " Predicted: " << prediction << "\n";
             }
             
         }
